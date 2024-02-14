@@ -58,12 +58,12 @@ const CustomHeader =() => {
 const styles = StyleSheet.create({
   safeArea:{
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: Colors.medium,
   },
   container: {
     height: 100,
     backgroundColor: "#fff",
-    padding: 20,
+    paddingHorizontal: 20,
     gap: 20,
     alignItems: "center",
     justifyContent: "space-between",

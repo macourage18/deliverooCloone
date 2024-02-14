@@ -2,9 +2,6 @@
 import { Stack, useNavigation } from 'expo-router';
 import CustomHeader from '@/components/CustomHeader';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import Colors from '@/constants/Colors';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Ionicons } from '@expo/vector-icons';
 import ModalHeader from '@/components/ModalHeader';
 
 
@@ -26,9 +23,10 @@ const navagation = useNavigation()
           header: ()=> <CustomHeader />
         }} 
         />
+        
       <Stack.Screen name='(modal)/filter' 
       options={{
-        presentation:'modal',
+        presentation: 'modal', 
         header: ()=> <ModalHeader/>
       }}
        />
