@@ -1,7 +1,7 @@
 import Colors from '@/constants/Colors';
-import { EvilIcons, Ionicons } from '@expo/vector-icons';
+import {  Ionicons } from '@expo/vector-icons';
 import { BottomSheetBackdrop, BottomSheetModal, useBottomSheetModal } from '@gorhom/bottom-sheet'
-import { Link } from 'expo-router';
+import { Link, useNavigation} from 'expo-router';
 import React, { forwardRef, useCallback, useMemo } from 'react'
 import { Text, View, StyleSheet} from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -31,7 +31,7 @@ export type Ref = BottomSheetModal;
         </View>
 
         <Text style={styles.subHeader}>Your Location</Text>
-        <Link href={"/"} asChild>
+        <Link href={"/(modal)/location-search"} asChild>
           <TouchableOpacity>
             <View style={styles.item}>
               <Ionicons name='location-outline' size={20} color={Colors.medium} />

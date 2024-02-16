@@ -2,7 +2,10 @@
 import { Stack, useNavigation } from 'expo-router';
 import CustomHeader from '@/components/CustomHeader';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import ModalHeader from '@/components/ModalHeader';
+import Colors from '@/constants/Colors';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Ionicons } from '@expo/vector-icons';
+
 
 
 export const unstable_settings = {
@@ -13,10 +16,10 @@ export const unstable_settings = {
 
 
 export default function RootLayoutNav() {
-const navagation = useNavigation()
+  const navagation = useNavigation()
   return (
     <BottomSheetModalProvider>
-      <Stack>
+      <Stack >
         <Stack.Screen 
         name="index" 
         options={{
@@ -27,9 +30,36 @@ const navagation = useNavigation()
       <Stack.Screen name='(modal)/filter' 
       options={{
         presentation: 'modal', 
-        header: ()=> <ModalHeader/>
+        headerTitle: 'Filter',
+        headerStyle: {
+          backgroundColor: Colors.lightGray,
+        },
+        headerTitleAlign: 'center',
+        headerLeft: () => (
+          <TouchableOpacity style={{padding: 10,}} onPress={()=>{
+            navagation.goBack()
+            }}>
+              <Ionicons name='close-outline' size={28} color={Colors.primary} />
+          </TouchableOpacity>
+        )
       }}
        />
+       <Stack.Screen name='(modal)/location-search'
+       options={{
+        presentation: 'fullScreenModal',
+        headerTitle: 'Select Location',
+        headerStyle: {
+          backgroundColor: Colors.lightGray,
+        },
+        headerTitleAlign: 'center',
+        headerLeft: () => (
+          <TouchableOpacity style={{padding: 10,}} onPress={()=>{
+            navagation.goBack()
+            }}>
+              <Ionicons name='close-outline' size={28} color={Colors.primary} />
+          </TouchableOpacity>
+        )
+       }}/>
       </Stack>
       </BottomSheetModalProvider>
   );
