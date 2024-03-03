@@ -6,7 +6,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import MapView from 'react-native-maps'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 
-// 
+
 
 const LocationSearch = ()=> {
   const navagation = useNavigation()
@@ -16,19 +16,19 @@ const LocationSearch = ()=> {
     latitudeDelta: 0.02,
     longitudeDelta: 0.02,
   })
-    return (
+    return (  
       <View style={{flex:1}}>
-        <GooglePlacesAutocomplete 
-        placeholder='search' 
-        onPress={(data, details = null) =>{
-          console.log(data,details)
-        }} 
-        query={{
-          key: 'process.env.EXPO_PUBLIC_GOOGLE_API_KEY',
-          language: 'en',
-        }}
-      />
-
+      <GooglePlacesAutocomplete
+      placeholder='Search'
+      onPress={(data, details = null) => {
+        // 'details' is provided when fetchDetails = true
+        console.log(data, details);
+      }}
+      query={{
+        key: process.env.EXPO_PUBLIC_GOOGLE_API_KEY,
+        language: 'en',
+      }}
+    />
        
 
         <MapView showsUserLocation={true} style={styles.map} region={location} />
