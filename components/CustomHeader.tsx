@@ -1,13 +1,19 @@
 import Colors from '@/constants/Colors'
 import { Ionicons } from '@expo/vector-icons'
-import React from 'react'
-import { Text, View, SafeAreaView, StyleSheet,TextInput,TouchableOpacity,Image } from 'react-native'
+import React, { useState } from 'react'
+import { Text, View, SafeAreaView, StyleSheet,TextInput,TouchableOpacity,Image,StatusBar, Platform } from 'react-native'
 import { Link } from 'expo-router'
 import BottomSheet from './BottomSheet'
 import { BottomSheetModal } from '@gorhom/bottom-sheet'
 import { useRef } from 'react'
 
+const STYLES = ['default', 'dark-content', 'light-content'] as
+const;
+const TRANSITIONS = ['fade','slide','none'] as
+const;
+
 const SearchBar = ()=>{
+
   return(
     <View style={styles.searchContainer}>
       <View style={styles.searchSection}>
@@ -27,12 +33,17 @@ const SearchBar = ()=>{
 }
 
 const CustomHeader =() => {
+
   const bottomSheetRef = useRef<BottomSheetModal>(null)
   const openModal = ()=>{
     bottomSheetRef.current?.present();
   }
     return (
       <SafeAreaView style={styles.safeArea}>
+        <StatusBar
+        backgroundColor={"white"}
+        barStyle={"dark-content"}
+      />
          <BottomSheet ref={bottomSheetRef} />
        <View style={styles.container}> 
         <TouchableOpacity onPress={openModal}>
@@ -58,13 +69,14 @@ const CustomHeader =() => {
 const styles = StyleSheet.create({
   safeArea:{
     flex: 1,
-    backgroundColor: Colors.medium,
+    paddingTop:20
   },
   container: {
     height: 100,
     backgroundColor: "#fff",
     paddingHorizontal: 20,
     gap: 20,
+    // marginTop:20,
     alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "row",
@@ -72,7 +84,6 @@ const styles = StyleSheet.create({
   bike:{
     width: 30,
     height: 30,
-
   },
   titleContainer:{
     flex:1,
@@ -123,6 +134,10 @@ const styles = StyleSheet.create({
   },
   optionButton:{
     padding: 10,
+  },
+  textStyle: {
+    textAlign: 'center',
+    marginBottom: 8,
   },
 })
 

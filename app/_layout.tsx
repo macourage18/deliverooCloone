@@ -3,7 +3,7 @@ import { Stack, useNavigation } from 'expo-router';
 import CustomHeader from '@/components/CustomHeader';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import Colors from '@/constants/Colors';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { GestureHandlerRootView, TouchableOpacity } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
 
 
@@ -16,8 +16,9 @@ export const unstable_settings = {
 
 
 export default function RootLayoutNav() {
-  const navagation = useNavigation()
+  const navigation = useNavigation()
   return (
+    <GestureHandlerRootView style={{flex:1}}>
     <BottomSheetModalProvider>
       <Stack >
         <Stack.Screen 
@@ -37,7 +38,7 @@ export default function RootLayoutNav() {
         headerTitleAlign: 'center',
         headerLeft: () => (
           <TouchableOpacity style={{padding: 10,}} onPress={()=>{
-            navagation.goBack()
+            navigation.goBack()
             }}>
               <Ionicons name='close-outline' size={28} color={Colors.primary} />
           </TouchableOpacity>
@@ -54,7 +55,7 @@ export default function RootLayoutNav() {
         headerTitleAlign: 'center',
         headerLeft: () => (
           <TouchableOpacity style={{padding: 10,}} onPress={()=>{
-            navagation.goBack()
+            navigation.goBack()
             }}>
               <Ionicons name='close-outline' size={28} color={Colors.primary} />
           </TouchableOpacity>
@@ -62,5 +63,6 @@ export default function RootLayoutNav() {
        }}/>
       </Stack>
       </BottomSheetModalProvider>
+    </GestureHandlerRootView>
   );
 }

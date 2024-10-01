@@ -4,8 +4,8 @@ import React, { useState }  from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import MapView from 'react-native-maps'
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
-
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { Ionicons } from '@expo/vector-icons'
 
 
 const LocationSearch = ()=> {
@@ -18,18 +18,46 @@ const LocationSearch = ()=> {
   })
     return (  
       <View style={{flex:1}}>
+
       <GooglePlacesAutocomplete
-      placeholder='Search'
-      onPress={(data, details = null) => {
-        // 'details' is provided when fetchDetails = true
+      placeholder='Search or move the map'
+      fetchDetails={true}
+      onPress={(data, details) => {
+        const point = details?.geometry?.location;
         console.log(data, details);
+        if (!point) return;
+        setLocation({
+          ...location,
+          latitude: point.lat,
+          longitude: point.lng,
+        })
       }}
       query={{
         key: process.env.EXPO_PUBLIC_GOOGLE_API_KEY,
         language: 'en',
       }}
+
+      onFail={error => console.log(error)}
+      renderLeftButton={()=>(
+       <View style={styles.boxIcon} >
+          <Ionicons name="search-outline" size={24} color={Colors.medium} />
+        </View>
+      )}
+      styles={{
+        container:{
+          flex:0,
+        },
+        textInput:{
+          backgroundColor: Colors.grey,
+          paddingLeft: 35,
+          borderRadius:10,
+        },
+        textInputContainer:{
+          padding:8,
+          backgroundColor:'#fff',
+        },
+      }}
     />
-       
 
         <MapView showsUserLocation={true} style={styles.map} region={location} />
 
@@ -65,6 +93,12 @@ const LocationSearch = ()=> {
       fontWeight: 'bold',
       fontSize: 16,
     },
+    boxIcon:{
+      position: 'absolute',
+      left: 15,
+      top: 18,
+      zIndex:1,
+    }
   })
 
 export default LocationSearch

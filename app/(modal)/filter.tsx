@@ -6,6 +6,8 @@ import categories from '@/assets/data/filter.json'
 import { Ionicons } from '@expo/vector-icons'
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
 
 interface Category{
   name: string;
@@ -112,9 +114,11 @@ const Filter = ()=> {
          }}
          />
       </View>
+      
     )
     }
     return (
+      <GestureHandlerRootView style={{flex:1}}>
       <View style={styles.container}>
         <FlatList data={items} 
         renderItem={renderItem} ListHeaderComponent={<ItemBox />}/>
@@ -136,12 +140,12 @@ const Filter = ()=> {
           </View>
         </View>
       </View>
+      </GestureHandlerRootView>
     )
   }
 const styles =  StyleSheet.create({
   container:{
     flex: 1,
-    marginTop:61,
     backgroundColor: Colors.lightGray,
     padding: 24
   },
